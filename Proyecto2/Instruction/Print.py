@@ -44,6 +44,8 @@ class Print(Instruction):
             temp = generator.addTemp()
             generator.getStack(temp, 'P')
             generator.retEnv(env.size)
+        elif val.type == Type.FLOAT:
+             generator.addPrintF("f", val.value)
         else:
             print("POR HACER")
         

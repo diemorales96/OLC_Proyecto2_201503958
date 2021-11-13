@@ -3,9 +3,9 @@ from Symbol.Environment import *
 
 class Expression(ABC):
     
-    def __init__(self, line, column):
-        self.line = line
-        self.column = column
+    def __init__(self, fila, columna):
+        self.line = fila
+        self.column = columna
         self.trueLbl = ''
         self.falseLbl = ''
         self.structType = ''

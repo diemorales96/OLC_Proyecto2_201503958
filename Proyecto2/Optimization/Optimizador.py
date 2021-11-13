@@ -70,7 +70,7 @@ class Optimizador:
         self.GenerarLideres()
         self.CrearBloques()
         self.ConnectBloques()
-        print('Prueba')
+        #print('Prueba')
 
     def GenerarLideres(self):
         # Por cada funcion

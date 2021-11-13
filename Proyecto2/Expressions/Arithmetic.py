@@ -32,7 +32,10 @@ class Arithmetic(Expression):
         elif(self.type == ArithmeticOption.MINUS):
             op = '-'
         elif(self.type == ArithmeticOption.TIMES):
-            op = '*'
+            if self.left.type == Type.STRING and self.right.type == Type.STRING:
+                op = '+'
+            else:
+                op = '*'
         elif(self.type == ArithmeticOption.DIV):
             op = '/'    
         
@@ -54,7 +57,15 @@ class Arithmetic(Expression):
             generator.getStack(temp, 'P')
             generator.retEnv(env.size)
 
+            
             return Return(temp, Type.INT, True)
         else:
-            generator.addExp(temp, leftValue.value, rightValue.value, op)
-            return Return(temp, Type.INT, True)
+            if rightValue.value != 0:
+                generator.addExp(temp, leftValue.value, rightValue.value, op)
+                if self.left.type == Type.FLOAT or self.right.type == Type.FLOAT:
+                    return Return(temp, Type.FLOAT, True)
+                elif self.left.type == Type.STRING and self.right.type == Type.STRING:
+                    return Return(temp, Type.STRING, True)
+                return Return(temp, Type.INT, True)
+            else:
+                print("Error al dividir por 0")

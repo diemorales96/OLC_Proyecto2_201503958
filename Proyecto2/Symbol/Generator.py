@@ -221,6 +221,11 @@ class Generator:
         self.freeTemp(value)
         self.codeIn(f'fmt.Printf("%{type}", int({value}));\n')
     
+
+    def addPrintF(self, type, value):
+        self.freeTemp(value)
+        self.codeIn(f'fmt.Printf("%{type}", ({value}));\n')
+
     def printTrue(self):
         self.addPrint("c", 116)
         self.addPrint("c", 114)
