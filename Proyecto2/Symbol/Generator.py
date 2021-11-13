@@ -239,6 +239,19 @@ class Generator:
         self.addPrint("c", 115)
         self.addPrint("c", 101)
     
+    def printErrorZero(self):
+        #self.codeIn(f'fmt.Printf("Error al dividir dentro de 0");\n')
+        error= """fmt.Printf("%c",77);\n
+fmt.Printf("%c",97);\n
+fmt.Printf("%c",116);\n
+fmt.Printf("%c",104);\n
+fmt.Printf("%c",69);\n
+fmt.Printf("%c",114);\n
+fmt.Printf("%c",114);\n
+fmt.Printf("%c",111);\n
+fmt.Printf("%c",114);\n"""
+        self.codeIn(error)
+
     ##############
     # NATIVES
     ##############
