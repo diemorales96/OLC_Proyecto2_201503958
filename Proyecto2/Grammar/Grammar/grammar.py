@@ -269,6 +269,10 @@ def p_declaration(t):
     '''declarationST : ID EQUALS expression'''
     t[0] = Declaration(t[1], t[3], t.lineno(2), t.lexpos(2))
 
+def p_declaration2(t):
+    '''declarationST : ID EQUALS expression COLON COLON types'''
+    t[0] = Declaration(t[1], t[3], t.lineno(2), t.lexpos(2))
+
 # PRINT ST
 def p_printlnST(t):
     'printST  : PRINTLN LEPAR expression RIPAR'

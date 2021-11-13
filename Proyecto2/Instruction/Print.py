@@ -46,8 +46,8 @@ class Print(Instruction):
             generator.retEnv(env.size)
         elif val.type == Type.FLOAT:
              generator.addPrintF("f", val.value)
-        else:
-            print("POR HACER")
+        #else:
+        #    print("POR HACER")
         
         if self.newLine:
             generator.addPrint("c", 10)

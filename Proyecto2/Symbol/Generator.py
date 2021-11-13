@@ -161,7 +161,10 @@ class Generator:
     def addExp(self, result, left, right, op):
         self.freeTemp(left)
         self.freeTemp(right)
-        self.codeIn(f'{result}={left}{op}{right};\n')
+        if op =='/':
+            self.codeIn(f'{result}=float64({left}) {op} float64({right});\n')
+        else:
+            self.codeIn(f'{result}={left}{op}{right};\n')
     
     ###################
     # FUNCS
@@ -172,7 +175,7 @@ class Generator:
         self.codeIn(f'func {id}(){{\n', '')
     
     def addEndFunc(self):
-        self.codeIn('return;\n}\n');
+        self.codeIn('return;\n}\n')
         if(not self.inNatives):
             self.inFunc = False
 
@@ -224,7 +227,7 @@ class Generator:
 
     def addPrintF(self, type, value):
         self.freeTemp(value)
-        self.codeIn(f'fmt.Printf("%{type}", ({value}));\n')
+        self.codeIn(f'fmt.Printf("%.2{type}", ({value}));\n')
 
     def printTrue(self):
         self.addPrint("c", 116)

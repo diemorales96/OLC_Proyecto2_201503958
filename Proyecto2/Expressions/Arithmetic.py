@@ -33,13 +33,15 @@ class Arithmetic(Expression):
         elif(self.type == ArithmeticOption.MINUS):
             op = '-'
         elif(self.type == ArithmeticOption.TIMES):
-            if self.left.type == Type.STRING and self.right.type == Type.STRING:
-                op = '+'
-            else:
-                op = '*'
+            op = '*'
         elif(self.type == ArithmeticOption.DIV):
-            op = '/'    
-        
+            op = '/'
+            #print(rightValue.value)
+            if rightValue.value == '0':
+                #print("aca")
+                generator.printErrorZero()  
+                return Return(None,None,None)
+
         if (self.type == ArithmeticOption.POT):
             generator.fPotencia()
             paramTemp = generator.addTemp()
@@ -61,14 +63,17 @@ class Arithmetic(Expression):
             
             return Return(temp, Type.INT, True)
         else:
-            if self.right.value != 0:
-                generator.addExp(temp, leftValue.value, rightValue.value, op)
-                if self.left.type == Type.FLOAT or self.right.type == Type.FLOAT:
-                    return Return(temp, Type.FLOAT, True)
-                elif self.left.type == Type.STRING and self.right.type == Type.STRING:
-                    return Return(temp, Type.STRING, True)
-                return Return(temp, Type.INT, True)
-            else:
-                #generator.addExp(temp, leftValue.value, rightValue.value, op)
-                generator.printErrorZero()
-                return Return(None,None,None)
+
+            generator.addExp(temp, leftValue.value, rightValue.value, op)
+            #print(leftValue.type)
+            #print(rightValue.type)
+            if leftValue.type == Type.FLOAT or rightValue.type == Type.FLOAT:
+                return Return(temp, Type.FLOAT, True)
+            elif leftValue.type == Type.STRING and rightValue.type == Type.STRING:
+                return Return(temp, Type.STRING, True)
+            elif op == '/':
+                return Return(temp, Type.FLOAT, True)
+            return Return(temp, Type.INT, True)
+
+
+                
